@@ -13,6 +13,11 @@ struct Author {
     books: Vec<Book>,
 }
 
+fn serialize_json_dyn<T: Serialize>(input: &T) -> String {
+    let json_data = serde_json::to_string(input).unwrap();
+    return json_data;
+}
+
 fn serialize_json(author: &Author) -> String {
     return serde_json::to_string(author).unwrap();
 }
@@ -38,5 +43,8 @@ pub fn write_json() {
     };
 
     let json_payload = serialize_json(&author);
-    println!("JSON PAYLOAD: {}", json_payload)
+    println!("JSON PAYLOAD: {}", json_payload);
+
+    let json_payload_dyn = serialize_json_dyn::<Author>(&author);
+    println!("DYN PAYLOAD: {}", json_payload_dyn)
 }

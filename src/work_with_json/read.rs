@@ -21,10 +21,7 @@ fn parse_json(json_payload: &str) -> Author {
 }
 
 // Sample with dynamic(any data type) return type
-fn parse_json_dyn<T>(json_payload: &str) -> Result<T, serde_json::Error>
-where
-    T: DeserializeOwned,
-{
+fn parse_json_dyn<T: DeserializeOwned>(json_payload: &str) -> Result<T, serde_json::Error> {
     let parsed_data: Result<T, serde_json::Error> = serde_json::from_str(json_payload);
     parsed_data
 }
